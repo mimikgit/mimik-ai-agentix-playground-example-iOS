@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		31020B4C2C9B8E4900FF3530 /* config-model-05-gemma11.json in Resources */ = {isa = PBXBuildFile; fileRef = 31020B472C9B8E4900FF3530 /* config-model-05-gemma11.json */; };
 		31020B4F2C9B8E4900FF3530 /* config-developer-runtime-license in Resources */ = {isa = PBXBuildFile; fileRef = 31020B492C9B8E4900FF3530 /* config-developer-runtime-license */; };
-		31020B502C9B8E4900FF3530 /* config-mimik-ai-use-case-api-key in Resources */ = {isa = PBXBuildFile; fileRef = 31020B4A2C9B8E4900FF3530 /* config-mimik-ai-use-case-api-key */; };
+		31020B502C9B8E4900FF3530 /* config-developer-api-key in Resources */ = {isa = PBXBuildFile; fileRef = 31020B4A2C9B8E4900FF3530 /* config-developer-api-key */; };
 		310311732C2375C5000FBC94 /* AddModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310311722C2375C5000FBC94 /* AddModelView.swift */; };
 		310784B92E037CC500E200DA /* TokenInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310784B82E037CC500E200DA /* TokenInputView.swift */; };
 		310F15722DA444EC00DDD8D1 /* ColourText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310F15712DA444EC00DDD8D1 /* ColourText.swift */; };
@@ -54,13 +54,13 @@
 		31F955C52DAF17B900E34111 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F955C42DAF17B900E34111 /* AppDelegate.swift */; };
 		31F955C72DAF24D100E34111 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F955C62DAF24D100E34111 /* KeychainService.swift */; };
 		31F955C92DAF260A00E34111 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F955C82DAF260A00E34111 /* AuthState.swift */; };
-		3CA2CD203244BAD5EDA28C79 /* Pods_mimik_ai_chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43BA23958BCC159AA11CD80 /* Pods_mimik_ai_chat.framework */; };
+		FA096BF02314C81F76852CAD /* Pods_mimik_agentix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE5CC0EFF7DC0F5679B1E90 /* Pods_mimik_agentix.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		31020B472C9B8E4900FF3530 /* config-model-05-gemma11.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "config-model-05-gemma11.json"; sourceTree = "<group>"; };
 		31020B492C9B8E4900FF3530 /* config-developer-runtime-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-developer-runtime-license"; sourceTree = "<group>"; };
-		31020B4A2C9B8E4900FF3530 /* config-mimik-ai-use-case-api-key */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-mimik-ai-use-case-api-key"; sourceTree = "<group>"; };
+		31020B4A2C9B8E4900FF3530 /* config-developer-api-key */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-developer-api-key"; sourceTree = "<group>"; };
 		310311722C2375C5000FBC94 /* AddModelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddModelView.swift; sourceTree = "<group>"; };
 		310784B82E037CC500E200DA /* TokenInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInputView.swift; sourceTree = "<group>"; };
 		310F15712DA444EC00DDD8D1 /* ColourText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourText.swift; sourceTree = "<group>"; };
@@ -107,9 +107,9 @@
 		31F955C42DAF17B900E34111 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31F955C62DAF24D100E34111 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		31F955C82DAF260A00E34111 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
-		5C3CD1A6EE92398C7D1A0408 /* Pods-mimik-ai-chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mimik-ai-chat.release.xcconfig"; path = "Target Support Files/Pods-mimik-ai-chat/Pods-mimik-ai-chat.release.xcconfig"; sourceTree = "<group>"; };
-		D43BA23958BCC159AA11CD80 /* Pods_mimik_ai_chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mimik_ai_chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F10ABCEEC556592D669FC2D5 /* Pods-mimik-ai-chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mimik-ai-chat.debug.xcconfig"; path = "Target Support Files/Pods-mimik-ai-chat/Pods-mimik-ai-chat.debug.xcconfig"; sourceTree = "<group>"; };
+		4CE5CC0EFF7DC0F5679B1E90 /* Pods_mimik_agentix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mimik_agentix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3CA573B138C1FB8B34980E5 /* Pods-mimik-agentix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mimik-agentix.debug.xcconfig"; path = "Target Support Files/Pods-mimik-agentix/Pods-mimik-agentix.debug.xcconfig"; sourceTree = "<group>"; };
+		E6E3FCF5675BDD48673A80B7 /* Pods-mimik-agentix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mimik-agentix.release.xcconfig"; path = "Target Support Files/Pods-mimik-agentix/Pods-mimik-agentix.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CA2CD203244BAD5EDA28C79 /* Pods_mimik_ai_chat.framework in Frameworks */,
+				FA096BF02314C81F76852CAD /* Pods_mimik_agentix.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,8 +127,8 @@
 		02809D8826C20386B7115CC8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F10ABCEEC556592D669FC2D5 /* Pods-mimik-ai-chat.debug.xcconfig */,
-				5C3CD1A6EE92398C7D1A0408 /* Pods-mimik-ai-chat.release.xcconfig */,
+				B3CA573B138C1FB8B34980E5 /* Pods-mimik-agentix.debug.xcconfig */,
+				E6E3FCF5675BDD48673A80B7 /* Pods-mimik-agentix.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -150,13 +150,13 @@
 			children = (
 				31DA27122D834D8800540C89 /* milm-v1-1.9.1.tar */,
 				31020B492C9B8E4900FF3530 /* config-developer-runtime-license */,
-				31020B4A2C9B8E4900FF3530 /* config-mimik-ai-use-case-api-key */,
+				31020B4A2C9B8E4900FF3530 /* config-developer-api-key */,
 				31DA27ED2D834F0800540C89 /* mimik-ai-use-case-config.json */,
 				3179E40B2E26CCF600EB2A58 /* Model Configs */,
-				317F4A2F2C10CCF3006F5F5F /* mimik-ai-chat */,
+				317F4A2F2C10CCF3006F5F5F /* mimik-agentix */,
 				317F4A2E2C10CCF3006F5F5F /* Products */,
 				02809D8826C20386B7115CC8 /* Pods */,
-				4F5B747700B84B6B25750A3D /* Frameworks */,
+				7935BE637C92A024431D89A9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,7 +168,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		317F4A2F2C10CCF3006F5F5F /* mimik-ai-chat */ = {
+		317F4A2F2C10CCF3006F5F5F /* mimik-agentix */ = {
 			isa = PBXGroup;
 			children = (
 				317F4A302C10CCF3006F5F5F /* aichat_app_iOSApp.swift */,
@@ -181,7 +181,7 @@
 				317F4A342C10CCF4006F5F5F /* Assets.xcassets */,
 				317F4A362C10CCF4006F5F5F /* Preview Content */,
 			);
-			path = "mimik-ai-chat";
+			path = "mimik-agentix";
 			sourceTree = "<group>";
 		};
 		317F4A362C10CCF4006F5F5F /* Preview Content */ = {
@@ -254,10 +254,10 @@
 			path = Misc;
 			sourceTree = "<group>";
 		};
-		4F5B747700B84B6B25750A3D /* Frameworks */ = {
+		7935BE637C92A024431D89A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D43BA23958BCC159AA11CD80 /* Pods_mimik_ai_chat.framework */,
+				4CE5CC0EFF7DC0F5679B1E90 /* Pods_mimik_agentix.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -265,21 +265,21 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		317F4A2C2C10CCF3006F5F5F /* mimik-ai-chat */ = {
+		317F4A2C2C10CCF3006F5F5F /* mimik-agentix */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 317F4A3B2C10CCF4006F5F5F /* Build configuration list for PBXNativeTarget "mimik-ai-chat" */;
+			buildConfigurationList = 317F4A3B2C10CCF4006F5F5F /* Build configuration list for PBXNativeTarget "mimik-agentix" */;
 			buildPhases = (
-				78FFD1E882E1BF170CE5CF1A /* [CP] Check Pods Manifest.lock */,
+				EC0D6F9BB1497D12F13A7B4F /* [CP] Check Pods Manifest.lock */,
 				317F4A292C10CCF3006F5F5F /* Sources */,
 				317F4A2A2C10CCF3006F5F5F /* Frameworks */,
 				317F4A2B2C10CCF3006F5F5F /* Resources */,
-				44A8AACC8D4B619FF9C59164 /* [CP] Embed Pods Frameworks */,
+				2840C8C8F99C2411D348AC8A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "mimik-ai-chat";
+			name = "mimik-agentix";
 			productName = "aichat-app-iOS";
 			productReference = 317F4A2D2C10CCF3006F5F5F /* Agentix Play.app */;
 			productType = "com.apple.product-type.application";
@@ -299,7 +299,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 317F4A282C10CCF3006F5F5F /* Build configuration list for PBXProject "mimik-ai-chat" */;
+			buildConfigurationList = 317F4A282C10CCF3006F5F5F /* Build configuration list for PBXProject "mimik-agentix" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -312,7 +312,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				317F4A2C2C10CCF3006F5F5F /* mimik-ai-chat */,
+				317F4A2C2C10CCF3006F5F5F /* mimik-agentix */,
 			);
 		};
 /* End PBXProject section */
@@ -329,7 +329,7 @@
 				31DA27EE2D834F0800540C89 /* mimik-ai-use-case-config.json in Resources */,
 				31A853412D2DAB8C00E6983D /* config-model-01-mistral7b.json in Resources */,
 				31020B4F2C9B8E4900FF3530 /* config-developer-runtime-license in Resources */,
-				31020B502C9B8E4900FF3530 /* config-mimik-ai-use-case-api-key in Resources */,
+				31020B502C9B8E4900FF3530 /* config-developer-api-key in Resources */,
 				31D4A97A2D39BA0300639FA1 /* config-model-02-llava7b.json in Resources */,
 				317F4A382C10CCF4006F5F5F /* Preview Assets.xcassets in Resources */,
 				317F4A352C10CCF4006F5F5F /* Assets.xcassets in Resources */,
@@ -339,28 +339,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		44A8AACC8D4B619FF9C59164 /* [CP] Embed Pods Frameworks */ = {
+		2840C8C8F99C2411D348AC8A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mimik-ai-chat/Pods-mimik-ai-chat-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-mimik-agentix/Pods-mimik-agentix-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mimik-ai-chat/Pods-mimik-ai-chat-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-mimik-agentix/Pods-mimik-agentix-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mimik-ai-chat/Pods-mimik-ai-chat-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mimik-agentix/Pods-mimik-agentix-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		78FFD1E882E1BF170CE5CF1A /* [CP] Check Pods Manifest.lock */ = {
+		EC0D6F9BB1497D12F13A7B4F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -375,7 +371,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mimik-ai-chat-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-mimik-agentix-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -584,18 +580,18 @@
 		};
 		317F4A3C2C10CCF4006F5F5F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F10ABCEEC556592D669FC2D5 /* Pods-mimik-ai-chat.debug.xcconfig */;
+			baseConfigurationReference = B3CA573B138C1FB8B34980E5 /* Pods-mimik-agentix.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"mimik-ai-chat/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"mimik-agentix/Preview Content\"";
 				DEVELOPMENT_TEAM = GL288K3PB5;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "mimik-ai-chat/Info.plist";
+				INFOPLIST_FILE = "mimik-agentix/Info.plist";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "This app needs to discover devices on your local network.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -619,18 +615,18 @@
 		};
 		317F4A3D2C10CCF4006F5F5F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C3CD1A6EE92398C7D1A0408 /* Pods-mimik-ai-chat.release.xcconfig */;
+			baseConfigurationReference = E6E3FCF5675BDD48673A80B7 /* Pods-mimik-agentix.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"mimik-ai-chat/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"mimik-agentix/Preview Content\"";
 				DEVELOPMENT_TEAM = GL288K3PB5;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "mimik-ai-chat/Info.plist";
+				INFOPLIST_FILE = "mimik-agentix/Info.plist";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "This app needs to discover devices on your local network.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -655,7 +651,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		317F4A282C10CCF3006F5F5F /* Build configuration list for PBXProject "mimik-ai-chat" */ = {
+		317F4A282C10CCF3006F5F5F /* Build configuration list for PBXProject "mimik-agentix" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				317F4A392C10CCF4006F5F5F /* Debug */,
@@ -664,7 +660,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		317F4A3B2C10CCF4006F5F5F /* Build configuration list for PBXNativeTarget "mimik-ai-chat" */ = {
+		317F4A3B2C10CCF4006F5F5F /* Build configuration list for PBXNativeTarget "mimik-agentix" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				317F4A3C2C10CCF4006F5F5F /* Debug */,

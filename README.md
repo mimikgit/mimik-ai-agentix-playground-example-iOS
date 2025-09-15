@@ -37,7 +37,7 @@ Before getting started:
 Clone the project and open it in Xcode:
 
 ```bash
-git clone https://github.com/mimikgit/mimik-ai-chat-example-iOS.git
+git clone https://github.com/mimikgit/mimik-ai-agentix-playground-example-iOS.git
 ```
 
 ---
@@ -54,7 +54,7 @@ These are already declared in the `Podfile`.
 ### Step 1: Navigate to the Source Directory
 
 ```bash
-cd mimik-ai-chat-example-iOS/Source/
+cd mimik-ai-agentix-playground-example-iOS/Source/
 ```
 
 ### Step 2: Install Pods
@@ -73,15 +73,16 @@ pod install --repo-update
 ### Runtime License
 
 - For **TestFlight builds**, the runtime license is **built in automatically**.  
-- For **source builds**, you must still copy/paste your runtime license manually:  
+- For **source builds**, you must still copy/paste your runtime license manually from [developer console](https://console.mimik.com):  
 
 ```bash
 open config-developer-runtime-license
 ```
 
 > This step will be automated in a future release with a new API call.  
+> [Developer console tutorial](https://devdocs.mimik.com/tutorials/01-submenu/01-submenu/02-index)
 
-### API Key (Optional)
+### API Key
 
 ```bash
 open config-developer-api-key
@@ -104,7 +105,7 @@ These JSON files define model download URLs and settings. You can leave them as-
 Open the workspace:
 
 ```bash
-open mimik-ai-chat.xcworkspace
+open mimik-agentix.xcworkspace
 ```
  And run on either a **physical iOS device** or **Apple Silicon Mac**.
 

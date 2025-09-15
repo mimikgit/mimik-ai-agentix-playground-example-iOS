@@ -2,7 +2,7 @@ platform :ios, '16.0'
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/mimikgit/cocoapod-edge-specs.git'
 
-target 'mimik-ai-chat' do
+target 'mimik-agentix' do
   use_frameworks!
   inhibit_all_warnings!
   pod 'EdgeCore'
