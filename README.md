@@ -6,7 +6,14 @@ The app also supports activating online services (e.g., **Google Gemini**) and u
 
 When running on **Apple Silicon Macs**, the app unlocks additional capabilities such as support for **Vision-Enabled Language Models**. You can upload images and receive intelligent visual feedback—within the same Swift-based codebase.
 
-This example is built using **EdgeClient.AI.ServiceInterface**, part of the **mimik Client Library**. This unified abstraction layer simplifies working with AI models across device, edge, and cloud environments, supporting real-time streaming and discovery.
+The latest versions now include:
+
+- **Built-in authentication** with your [mimik Developer Console](https://console.mimik.com) account.  
+- **Automatic token retrieval** after login (no manual copy/paste).  
+- **Automatic project creation** (“Agentix Playground”) in your Developer Console (with approval).  
+- For developers compiling from source: runtime license setup and customization remain available.  
+
+This example is built using **ClientLibrary** and **ClientRuntime**, part of the **mimik Client Library v5.10.0**. This unified abstraction layer simplifies working with AI models across device, edge, and cloud environments, supporting real-time streaming and discovery.
 
 ---
 
@@ -19,7 +26,9 @@ Before getting started:
 
 - Alternatively, you can run the app on an **Apple Silicon Mac**.
 
-> ⚠️ Vision-enabled features are available **only** on Apple Silicon Macs, for now.
+> ⚠️ Vision-enabled features are available **only** on Apple Silicon Macs.  
+
+> 🆕 **Authentication with your mimik Developer Console account is now required** when the app launches.  
 
 ---
 
@@ -28,7 +37,7 @@ Before getting started:
 Clone the project and open it in Xcode:
 
 ```bash
-git clone https://github.com/mimikgit/mimik-ai-chat-example-iOS.git
+git clone https://github.com/mimikgit/mimik-ai-agentix-playground-example-iOS.git
 ```
 
 ---
@@ -45,7 +54,7 @@ These are already declared in the `Podfile`.
 ### Step 1: Navigate to the Source Directory
 
 ```bash
-cd mimik-ai-chat-example-iOS/Source/
+cd mimik-ai-agentix-playground-example-iOS/Source/
 ```
 
 ### Step 2: Install Pods
@@ -58,37 +67,33 @@ pod install --repo-update
 
 # Configure Runtime Credentials
 
-The app requires a few configuration files for runtime access and model setup.
+> 🆕 **Developer ID Tokens are retrieved automatically** after login.  
+> Manual copy/paste of `config-developer-id-token` is no longer required.
 
-### Step 3: Developer ID Token
+### Runtime License
+
+- For **TestFlight builds**, the runtime license is **built in automatically**.  
+- For **source builds**, you must still copy/paste your runtime license manually from [developer console](https://console.mimik.com):  
 
 ```bash
-open config-developer-id-token
+open config-developer-runtime-license
 ```
 
-Generate a **Developer ID Token** in the [mimik Developer Console](https://console.mimik.com) and paste it into this file.  
-➡️ [Tutorial](https://devdocs.mimik.com/tutorials/01-submenu/01-submenu/02-index)
+> This step will be automated in a future release with a new API call.  
+> [Developer console tutorial](https://devdocs.mimik.com/tutorials/01-submenu/01-submenu/02-index)
 
-### Step 4: mim OE License
+### API Key
 
 ```bash
-open config-developer-mim-OE-license
+open config-developer-api-key
 ```
 
-Paste your **mim OE License** from the Developer Console into this file.
+Paste your API key to authenticate specific app calls if needed.  
 
-### Step 5: Your API Key
-
-```bash
-open config-mimik-ai-use-case-api-key
-```
-
-Paste your API key to authenticate app calls.
-
-### Step 6: Review Model Configurations
+### Model Configurations
 
 ```bash
-open config-model-04-gemma2b.json; open config-model-05-gemma11.json
+open Model-Configs/config-model-04-gemma2b.json; open Model-Configs/config-model-05-gemma11.json
 ```
 
 These JSON files define model download URLs and settings. You can leave them as-is unless you're customizing models.
@@ -100,7 +105,7 @@ These JSON files define model download URLs and settings. You can leave them as-
 Open the workspace:
 
 ```bash
-open mimik-ai-chat.xcworkspace
+open mimik-agentix.xcworkspace
 ```
  And run on either a **physical iOS device** or **Apple Silicon Mac**.
 
@@ -121,7 +126,7 @@ Run the app and follow the on-device prompts to continue.
 
 Apple Silicon Macs can run iOS apps natively on macOS, including the iOS mim OE binary.
 
-Select **My Mac (Designed for iPad)** it in Xcode as the run target.
+Select **My Mac (Designed for iPad)** in Xcode as the run target.
 
 Run the app and follow the on-device prompts to continue.
 
@@ -131,7 +136,17 @@ Run the app and follow the on-device prompts to continue.
 
 # Getting Started in the App
 
-After launching the app, tap the **START HERE** button.
+After launching the app, you’ll first be prompted to **sign in with your mimik Developer Console account**.
+
+- Options include **Sign in**, **Sign up**, or **Reset Password**.  
+- A new project (**Agentix Playground**) can be automatically created in your Developer Console (after user approval).  
+- Authentication is required on every app relaunch.  
+  > Developers compiling from source may extend the code to persist login if desired.
+
+![TODO-auth-login-screenshot](./images/40-auth-login.png)  
+![TODO-project-creation-screenshot](./images/40-project-creation.png)  
+
+Once logged in, tap the **START HERE** button.
 
 ![01-screenshot](./images/01-screenshot.png)
 
@@ -143,7 +158,7 @@ To start, you'll download an on-device model and set it as the **Prompt Service*
 
 > Later, you'll use another service (e.g., Gemini) as the **Validation Service** for hybrid workflows.
 
-### Download a language Model
+### Download a Language Model
 
 Tap **Add On-Device Models** in the system menu.
 
@@ -151,13 +166,13 @@ Tap **Add On-Device Models** in the system menu.
 
 You’ll see two model presets:
 
-- `gemma-v2-2b` (recommended)
-- `gemma-v1.1-2b`
+- `gemma-v2-2b` (recommended)  
+- `gemma-v1.1-2b`  
 
 These models are defined in:
 
-- `config-model-04-gemma2b.json`
-- `config-model-05-gemma11.json`
+- `config-model-04-gemma2b.json`  
+- `config-model-05-gemma11.json`  
 
 Select `gemma-v2-2b`, then tap **START DOWNLOAD**.
 
@@ -174,8 +189,8 @@ Select `gemma-v2-2b`, then tap **START DOWNLOAD**.
 ![04-screenshot](./images/04-screenshot.png)
 
 **Tips:**
-- Keep the app active and the screen awake.
-- Use the button to cancel at any time.
+- Keep the app active and the screen awake.  
+- Use the button to cancel at any time.  
 
 ---
 
@@ -189,8 +204,8 @@ Type your query, and the assistant will stream its response in real time.
 
 ![06-screenshot](./images/06-screenshot.png) ![07-screenshot](./images/07-screenshot.png)
 
-- Tap a button to stop a response mid-stream.
-- The app displays token throughput after each response.
+- Tap a button to stop a response mid-stream.  
+- The app displays token throughput after each response.  
 
 ---
 
@@ -202,8 +217,8 @@ The assistant maintains session context across prompts for more natural, coheren
 
 Manage the conversation with:
 
-- **Clear** – resets the chat history.
-- **Copy** – saves the conversation to clipboard.
+- **Clear** – resets the chat history.  
+- **Copy** – saves the conversation to clipboard.  
 
 ---
 
@@ -213,7 +228,7 @@ On Apple Silicon Macs, Vision Language Models allow image input with descriptive
 
 > ❗ Vision models **do not support** multi-turn chat or context chaining.
 
-![10a-screenshot](./images/10a-screenshot.png)
+![10a-screenshot](./images/10a-screenshot.png)  
 ![10b-screenshot](./images/10b-screenshot.png)  
 ![11-screenshot](./images/11-screenshot.png)  
 ![12-screenshot](./images/12-screenshot.png)
@@ -226,16 +241,16 @@ To demonstrate hybrid AI workflows, you’ll set up **Google Gemini** as the Val
 
 ### Activate Google Gemini
 
-1. Tap **Activate Services**, then choose **Gemini**.
-2. Enter your **Google Gemini Developer API Key**.
-3. Tap **Connect** to activate the service.
+1. Tap **Activate Services**, then choose **Gemini**.  
+2. Enter your **Google Gemini Developer API Key**.  
+3. Tap **Connect** to activate the service.  
 
 ### Notes:
 
-- Google Gemini is the only supported online validation service (for now).
-- You must provide your own Gemini API key.
-- Contextual chaining is disabled while online services are active.
-- Online responses do **not** include token throughput stats.
+- Google Gemini is the only supported online validation service (for now).  
+- You must provide your own Gemini API key.  
+- Contextual chaining is disabled while online services are active.  
+- Online responses do **not** include token throughput stats.  
 
 ![13-screenshot](./images/13-screenshot.png)  
 ![14-screenshot](./images/14-screenshot.png)  
@@ -249,10 +264,10 @@ To demonstrate hybrid AI workflows, you’ll set up **Google Gemini** as the Val
 
 Access app settings via the gear icon:
 
-- **Add On-Device Models** – Download new models.
-- **Remove On-Device Models** – Delete existing model files.
-- **Erase All Content** – Reset the app and delete all models.
-- **Deactivate Services** – Disconnect from online services.
+- **Add On-Device Models** – Download new models.  
+- **Remove On-Device Models** – Delete existing model files.  
+- **Erase All Content** – Reset the app and delete all models.  
+- **Deactivate Services** – Disconnect from online services.  
 
 ![30-screenshot](./images/30-screenshot.png)  
 ![31-screenshot](./images/31-screenshot.png)
@@ -278,8 +293,35 @@ Once a model is downloaded, the app functions 100% offline—even in airplane mo
 
 Once you have at least one on-device model and one active online service, you can:
 
-- Choose either as the **Prompt** or **Validation** service.
-- Use the **swap** button to quickly exchange the two.
+- Choose either as the **Prompt** or **Validation** service.  
+- Use the **swap** button to quickly exchange the two.  
+
+---
+
+# Developer Customization (Source Builds)
+
+If you are compiling from source, you can customize the automatically created project:
+
+- Change the application name  
+- Update the logo  
+- Modify the description string shown at the login screen  
+
+![TODO-dev-customization-screenshot](./images/42-dev-customization.png)
+
+---
+
+# Codebase Updates
+
+The app is now built on the latest **mimik ClientLibrary v5.10.0**, which brings:  
+
+- `async/await` for asynchronous operations  
+- Throwing functions for error handling  
+- Cleaner, simplified function signatures  
+
+### Migration Summary
+- **EdgeClient → ClientLibrary**  
+- **EdgeEngineClient → ClientRuntime**  
+- **EngineService → RuntimeService**  
 
 ---
 
@@ -287,8 +329,11 @@ Once you have at least one on-device model and one active online service, you ca
 
 Prefer not to build the app yourself?
 
-1. Open [this TestFlight link](https://testflight.apple.com/join/qoSKwIAE) on your iOS device.
-2. Accept the invitation and install the app.
+1. Open [this TestFlight link](https://testflight.apple.com/join/qoSKwIAE) on your iOS device.  
+2. Accept the invitation and install the app.  
+
+> 🆕 With TestFlight builds, login, token retrieval, and runtime licenses are all handled automatically.  
+
 
 ---
 
@@ -296,8 +341,8 @@ Prefer not to build the app yourself?
 
 Learn more about iOS + mimik AI integration:
 
-- [Understanding the mimik Client Library for iOS](https://devdocs.mimik.com/key-concepts/10-index)
-- [Creating a Simple iOS App with Edge Microservices](https://devdocs.mimik.com/tutorials/01-submenu/02-submenu/01-index)
-- [Integrating mimik into an iOS Project](https://devdocs.mimik.com/tutorials/01-submenu/02-submenu/02-index)
-- [Working with Edge Microservices in iOS](https://devdocs.mimik.com/tutorials/01-submenu/02-submenu/04-index)
-- [Using AI Models in iOS](https://devdocs.mimik.com/tutorials/02-submenu/02-submenu/01-index)
+- [Understanding the mimik Client Library for iOS](https://devdocs.mimik.com/key-concepts/10-index)  
+- [Creating a Simple iOS App with Edge Microservices](https://devdocs.mimik.com/tutorials/01-submenu/02-submenu/01-index)  
+- [Integrating mimik into an iOS Project](https://devdocs.mimik.com/tutorials/01-submenu/02-submenu/02-index)  
+- [Working with Edge Microservices in iOS](https://devdocs.mimik.com/tutorials/01-submenu/02-submenu/04-index)  
+- [Using AI Models in iOS](https://devdocs.mimik.com/tutorials/02-submenu/02-submenu/01-index)  
