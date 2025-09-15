@@ -133,7 +133,7 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		3179E40B2E26CCF600EB2A58 /* Model Configs */ = {
+		3179E40B2E26CCF600EB2A58 /* Model-Configs */ = {
 			isa = PBXGroup;
 			children = (
 				31A8533F2D2DAB8C00E6983D /* config-model-01-mistral7b.json */,
@@ -142,7 +142,7 @@
 				319620592CD27C2D00ADE960 /* config-model-04-gemma2b.json */,
 				31020B472C9B8E4900FF3530 /* config-model-05-gemma11.json */,
 			);
-			path = "Model Configs";
+			path = "Model-Configs";
 			sourceTree = "<group>";
 		};
 		317F4A242C10CCF3006F5F5F = {
@@ -152,7 +152,7 @@
 				31020B492C9B8E4900FF3530 /* config-developer-runtime-license */,
 				31020B4A2C9B8E4900FF3530 /* config-developer-api-key */,
 				31DA27ED2D834F0800540C89 /* mimik-ai-use-case-config.json */,
-				3179E40B2E26CCF600EB2A58 /* Model Configs */,
+				3179E40B2E26CCF600EB2A58 /* Model-Configs */,
 				317F4A2F2C10CCF3006F5F5F /* mimik-agentix */,
 				317F4A2E2C10CCF3006F5F5F /* Products */,
 				02809D8826C20386B7115CC8 /* Pods */,
@@ -347,9 +347,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-mimik-agentix/Pods-mimik-agentix-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-mimik-agentix/Pods-mimik-agentix-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
