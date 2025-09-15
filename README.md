@@ -93,7 +93,7 @@ Paste your API key to authenticate specific app calls if needed.
 ### Model Configurations
 
 ```bash
-open config-model-04-gemma2b.json; open config-model-05-gemma11.json
+open Model-Configs/config-model-04-gemma2b.json; open Model-Configs/config-model-05-gemma11.json
 ```
 
 These JSON files define model download URLs and settings. You can leave them as-is unless you're customizing models.
