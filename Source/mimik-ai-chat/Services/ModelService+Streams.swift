@@ -11,10 +11,10 @@ import SwiftUI
 extension ModelService {
     
     // Posts a user message to the app state, optionally with a resized image.
-    internal func postUserPrompt(message: EdgeClient.AI.Model.Message, image: UIImage? = nil, resizeImgOptions: EdgeClient.ImageResizeOptions? = nil) {
+    internal func postUserPrompt(message: ClientLibrary.AI.Model.Message, image: UIImage? = nil, resizeImgOptions: ClientLibrary.ImageResizeOptions? = nil) {
         
         if let image = image, let resizeImgOptions = resizeImgOptions, let resizedImage = image.resizeImage(targetSize: resizeImgOptions.size, bytesLimit: resizeImgOptions.bytesLimit, compressionQuality: resizeImgOptions.compressionQuality), let imageBase64String = resizedImage.base64FromJpeg(compressionQuality: 0.5) {
-            let newMessageWithImage = EdgeClient.AI.Model.Message(role: message.role, content: message.content, thumbnailBase64: imageBase64String, modelId: message.modelId)
+            let newMessageWithImage = ClientLibrary.AI.Model.Message(role: message.role, content: message.content, thumbnailBase64: imageBase64String, modelId: message.modelId)
             appState.postedMessages.append(newMessageWithImage)
         }
         else {
@@ -23,7 +23,7 @@ extension ModelService {
     }
 
     // Updates the posted messages array with an incoming AI stream chunk.
-    internal func ongoingStreamResponse(message: EdgeClient.AI.Model.Message) {
+    internal func ongoingStreamResponse(message: ClientLibrary.AI.Model.Message) {
         
         guard let role = message.role, let content = message.content, let previousMessage = appState.postedMessages.last else {
             return
@@ -40,7 +40,7 @@ extension ModelService {
             let existingContent = previousMessage.content ?? ""
             let mergedContent = existingContent + content
             
-            let mergedMessage = EdgeClient.AI.Model.Message(
+            let mergedMessage = ClientLibrary.AI.Model.Message(
                 role: role,
                 content: mergedContent,
                 thumbnailBase64: message.thumbnailBase64,
@@ -57,7 +57,7 @@ extension ModelService {
     }
     
     // Processes a single chunk of streaming AI completion and updates UI state and token usage.
-    func processUniversal(stream: EdgeClient.AI.Model.CompletionResponse) {
+    func processUniversal(stream: ClientLibrary.AI.Model.CompletionResponse) {
         
         if let modelId = stream.model, stream.finished() {
             return handleEndOfStream(stream: stream, modelId: modelId)
@@ -80,7 +80,7 @@ extension ModelService {
         }
 
         if let modelId = stream.model, stream.finished() {
-            let usage = EdgeClient.AI.Model.Usage(promptTokens: stream.usage?.promptTokens, completionTokens: stream.usage?.completionTokens, totalTokens: stream.usage?.totalTokens, tokenPerSecond: stream.usage?.tokenPerSecond)
+            let usage = ClientLibrary.AI.Model.Usage(promptTokens: stream.usage?.promptTokens, completionTokens: stream.usage?.completionTokens, totalTokens: stream.usage?.totalTokens, tokenPerSecond: stream.usage?.tokenPerSecond)
             appState.tokenUsage[modelId] = usage
         }
 
@@ -90,19 +90,19 @@ extension ModelService {
   
     // Handles the final chunk of an AI streaming response by recording usage metrics
     // and emitting the last assistant message (or a placeholder) to the UI.
-    internal func handleEndOfStream(stream: EdgeClient.AI.Model.CompletionResponse, modelId: String) {
+    internal func handleEndOfStream(stream: ClientLibrary.AI.Model.CompletionResponse, modelId: String) {
         
         // Record token usage for the completed stream
-        let usage = EdgeClient.AI.Model.Usage(promptTokens: stream.usage?.promptTokens, completionTokens: stream.usage?.completionTokens, totalTokens: stream.usage?.totalTokens, tokenPerSecond: stream.usage?.tokenPerSecond)
+        let usage = ClientLibrary.AI.Model.Usage(promptTokens: stream.usage?.promptTokens, completionTokens: stream.usage?.completionTokens, totalTokens: stream.usage?.totalTokens, tokenPerSecond: stream.usage?.tokenPerSecond)
         appState.tokenUsage[modelId] = usage
 
         // Determine the final assistant message and associated text
-        let (finalMessage, finalText): (EdgeClient.AI.Model.Message, String) = {
+        let (finalMessage, finalText): (ClientLibrary.AI.Model.Message, String) = {
             if let contentMessage = stream.contentMessage(), let text = stream.contentText() {
                 return (contentMessage, text)
             } else {
                 // Fallback: emit an empty assistant message to signal end of stream
-                let emptyMsg = EdgeClient.AI.Model.Message(role: "assistant", content: "", thumbnailBase64: nil, modelId: modelId)
+                let emptyMsg = ClientLibrary.AI.Model.Message(role: "assistant", content: "", thumbnailBase64: nil, modelId: modelId)
                 return (emptyMsg, "")
             }
         }()

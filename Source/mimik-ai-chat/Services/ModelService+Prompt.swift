@@ -12,7 +12,7 @@ extension ModelService {
         
     // Sends a prompt to the AI assistant using the specified service configuration.
     @MainActor
-    func assistantPrompt(configuration: EdgeClient.AI.ServiceConfiguration, prompt: String, isValidation: Bool) async throws {
+    func assistantPrompt(configuration: ClientLibrary.AI.ServiceConfiguration, prompt: String, isValidation: Bool) async throws {
         appState.generalMessage = "Contacting \(configuration.id) with a prompt. Please wait…"
 
         let (managedPrompt, userChatPost) = preparePrompt(originalPrompt: prompt, configuration: configuration, isValidation: isValidation)
@@ -21,7 +21,7 @@ extension ModelService {
             message: .init(role: "user", content: userChatPost, modelId: configuration.modelId)
         )
 
-        let client = EdgeClient.AI.HybridClient(configuration: configuration, hybridEdgeClient: self.engineService.hybridEdgeClient)
+        let client = ClientLibrary.AI.HybridClient(configuration: configuration)
         let cancellable = try await client.assistantPrompt(prompt: .init(role: "user", content: managedPrompt))
         appState.activeProtocolStream = cancellable
 
@@ -36,13 +36,13 @@ extension ModelService {
                 processUniversal(stream: chunk)
             }
         } catch {
-            EdgeClient.Log.logDebug(function: #function, line: #line, items: "Streaming error: \(error)", module: .edgeCore)
+            ClientLibrary.Log.logDebug(function: #function, line: #line, items: "Streaming error: \(error)", module: .mimikApps)
             showError(text: "Streaming error: \(error)")
         }
     }
 
     // Builds the managed and display prompts based on validation mode.
-    private func preparePrompt(originalPrompt: String, configuration: EdgeClient.AI.ServiceConfiguration, isValidation: Bool) -> (managedPrompt: String, userChatPost: String) {
+    private func preparePrompt(originalPrompt: String, configuration: ClientLibrary.AI.ServiceConfiguration, isValidation: Bool) -> (managedPrompt: String, userChatPost: String) {
         
         let contextLines = appState.postedMessages.map { msg in
             if msg.isUserType {
@@ -71,15 +71,15 @@ extension ModelService {
     
     // Starts an asynchronous stream with the specified vision service.
     @MainActor
-    func assistantVisionPrompt(configuration: EdgeClient.AI.ServiceConfiguration, prompt: String, image: UIImage) async throws {
+    func assistantVisionPrompt(configuration: ClientLibrary.AI.ServiceConfiguration, prompt: String, image: UIImage) async throws {
                 
         appState.generalMessage = "Contacting \(configuration.id) with a prompt. Please Wait..."
         
-        let userMessage = EdgeClient.AI.Model.Message(role: "user", content: prompt, modelId: configuration.modelId)
+        let userMessage = ClientLibrary.AI.Model.Message(role: "user", content: prompt, modelId: configuration.modelId)
         postUserPrompt(message: userMessage)
-        let resizeImgOptions = EdgeClient.ImageResizeOptions(size: CGSize.init(width: 500, height: 500), compressionQuality: 0.5, bytesLimit: 100_000)
+        let resizeImgOptions = ClientLibrary.ImageResizeOptions(size: CGSize.init(width: 500, height: 500), compressionQuality: 0.5, bytesLimit: 100_000)
         
-        let client: any EdgeClient.AI.ServiceInterface = EdgeClient.AI.HybridClient(configuration: configuration, hybridEdgeClient: self.engineService.hybridEdgeClient)
+        let client: any ClientLibrary.AI.ServiceInterface = ClientLibrary.AI.HybridClient(configuration: configuration)
         let cancellable = try await client.assistantVisionPrompt(prompt: userMessage, image: image, resizeImgOptions: resizeImgOptions)
         appState.activeProtocolStream = cancellable
 
@@ -88,7 +88,7 @@ extension ModelService {
                 processUniversal(stream: chunk)
             }
         } catch {
-            EdgeClient.Log.logDebug(function: #function, line: #line, items: "Streaming error: \(error)", module: .edgeCore)
+            ClientLibrary.Log.logDebug(function: #function, line: #line, items: "Streaming error: \(error)", module: .mimikApps)
             showError(text: "Streaming error: \(error)")
         }
 

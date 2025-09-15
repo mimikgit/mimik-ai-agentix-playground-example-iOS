@@ -13,7 +13,7 @@ struct MenuViewValidation: View {
 
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authState: AuthState
-    @EnvironmentObject var engineService: EngineService
+    @EnvironmentObject var runtimeService: RuntimeService
     @EnvironmentObject var modelService: ModelService
     
     var body: some View {

@@ -6,7 +6,7 @@ target 'mimik-ai-chat' do
   use_frameworks!
   inhibit_all_warnings!
   pod 'EdgeCore'
- pod 'mim-OE-ai-SE-iOS-developer'
+  pod 'mim-OE-ai-SE-iOS-developer'
 end
 
 post_install do |installer|

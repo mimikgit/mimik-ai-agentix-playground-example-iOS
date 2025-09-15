@@ -24,11 +24,11 @@ struct ChatMessagesView: View {
                     VStack {
                         HStack(spacing: 0) {
                             
-                            if let selection = appState.postedMessages[index] as EdgeClient.AI.Model.Message?, selection.isUserType {
+                            if let selection = appState.postedMessages[index] as ClientLibrary.AI.Model.Message?, selection.isUserType {
                                 userMessage(message: selection)
                             }
           
-                            if let selection = appState.postedMessages[index] as EdgeClient.AI.Model.Message?, selection.isAiType {
+                            if let selection = appState.postedMessages[index] as ClientLibrary.AI.Model.Message?, selection.isAiType {
                                 aiMessage(message: selection)
                             }
                         }
@@ -50,7 +50,7 @@ struct ChatMessagesView: View {
         }
     }
     
-    private func performanceText(message: EdgeClient.AI.Model.Message) -> some View {
+    private func performanceText(message: ClientLibrary.AI.Model.Message) -> some View {
 
         let hAlignment: HorizontalAlignment = message.isUserType ? .trailing : .leading
         let frameAlignment: Alignment = message.isUserType ? .trailing : .leading
@@ -93,13 +93,13 @@ struct ChatMessagesView: View {
         .padding(.horizontal, 16)
     }
     
-    private func aiMessage(message: EdgeClient.AI.Model.Message) -> some View {
+    private func aiMessage(message: ClientLibrary.AI.Model.Message) -> some View {
         ZStack(alignment: .bottomLeading) {
             GradientMessageView(message: message.content ?? "", alignment: .leading, foregroundColor: .white, gradientStyle: .blackToBlack)
         }
     }
     
-    private func userMessage(message: EdgeClient.AI.Model.Message) -> some View {
+    private func userMessage(message: ClientLibrary.AI.Model.Message) -> some View {
         ZStack(alignment: .bottomTrailing) {
             
             VStack {

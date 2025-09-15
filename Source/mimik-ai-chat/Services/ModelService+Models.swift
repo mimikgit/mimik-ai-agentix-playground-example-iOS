@@ -21,49 +21,47 @@ extension ModelService {
     
     @MainActor
     func updateDownloadedModels() async throws {
-        
-        guard let configuration = mimikAiConfiguration else {
-            print("❌ downloadedModels Error")
+        guard let configuration = mimikAiConfiguration, runtimeService.deployedUseCase != nil else {
+            print("❌ downloadedModels Error: missing configuration")
             return
         }
-                     
-        let client: any EdgeClient.AI.ServiceInterface = EdgeClient.AI.HybridClient(configuration: configuration, hybridEdgeClient: self.engineService.hybridEdgeClient)
-        let result = await client.availableModels()
-        
-        switch result {
-        case .success(let response):            
+
+        let client: any ClientLibrary.AI.ServiceInterface = ClientLibrary.AI.HybridClient(configuration: configuration)
+
+        do {
+            let response = try await client.availableModels()
             let readyModels = response.filter { $0.readyToUse ?? true }
             downloadedModels = readyModels
             print("✅", #function, downloadedModels)
-                        
-        case .failure(let error):
-            print("❌ downloadedModels Error: \(error.localizedDescription)")
+        } catch {
+            print("❌ downloadedModels Error:", error.localizedDescription)
             throw error
         }
     }
     
     @MainActor
-    func availableModels(configuration: EdgeClient.AI.ServiceConfiguration) async throws {
-                
+    func availableModels(configuration: ClientLibrary.AI.ServiceConfiguration) async throws {
         appState.generalMessage = "Contacting \(configuration.id) for available models. Please Wait..."
-             
-        let promptMessage = EdgeClient.AI.Model.Message(role: "user", content: "\(configuration.kind.rawValue): List available models", modelId: configuration.modelId)
+        
+        let promptMessage = ClientLibrary.AI.Model.Message(
+            role: "user",
+            content: "\(configuration.kind.rawValue): List available models",
+            modelId: configuration.modelId
+        )
         postUserPrompt(message: promptMessage)
         
-        let client: any EdgeClient.AI.ServiceInterface = EdgeClient.AI.HybridClient(configuration: configuration, hybridEdgeClient: self.engineService.hybridEdgeClient)
-        let result = await client.availableModelsMessage()
-
-        switch result {
-        case .success(let response):
+        let client: any ClientLibrary.AI.ServiceInterface = ClientLibrary.AI.HybridClient(configuration: configuration)
+        
+        do {
+            let response = try await client.availableModelsMessage()
             print("✅ \(configuration.id) Response:\n\(response)")
             ongoingStreamResponse(message: response)
             
             appState.newResponse = ""
             appState.generalMessage = ""
-                        
-        case .failure(let error):
+        } catch {
             print("❌ Error: \(error.localizedDescription)")
-            showError(text: error.domain)
+            showError(text: (error as NSError).domain)
             throw error
         }
     }
@@ -71,13 +69,13 @@ extension ModelService {
     @MainActor
     func deleteAIModel(id: String) async throws {
         
-        guard let apiKey = ConfigService.fetchConfig(for: .milmApiKey), let useCase = engineService.deployedUseCase else {
+        guard let apiKey = ConfigService.fetchConfig(for: .developerApiKey), let useCase = runtimeService.deployedUseCase else {
             print("⚠️ API key error")
             showError(text: "API key error")
             throw NSError(domain: "API key error", code: 500)
         }
                 
-        switch await engineService.edgeClient.deleteAIModel(id: id, accessToken: engineService.mimOEAccessToken, apiKey: apiKey, useCase: useCase) {
+        switch await ClientLibrary.deleteAIModel(id: id, accessToken: runtimeService.mimOEAccessToken, apiKey: apiKey, useCase: useCase) {
             
         case .success:
             appState.generalMessage = "\(id) deleted"

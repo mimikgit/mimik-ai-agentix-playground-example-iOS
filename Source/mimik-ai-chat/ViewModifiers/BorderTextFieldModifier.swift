@@ -39,9 +39,3 @@ struct BorderTextFieldModifier: ViewModifier {
         }
     }
 }
-
-extension View {
-    func textFieldModifier(minWidth: CGFloat = 100, minHeight: CGFloat = 34, borderColor: Color = .gray, lineWidth: CGFloat = 1) -> some View {
-        self.modifier(BorderTextFieldModifier(minWidth: minWidth, minHeight: minHeight, borderColor: borderColor, lineWidth: lineWidth))
-    }
-}

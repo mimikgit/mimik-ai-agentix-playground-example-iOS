@@ -15,7 +15,7 @@ struct ContentView: View {
     
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject private var appState: AppState
-    @EnvironmentObject private var engineService: EngineService
+    @EnvironmentObject private var runtimeService: RuntimeService
     @EnvironmentObject private var modelService: ModelService
     @EnvironmentObject var authState: AuthState
     
@@ -72,8 +72,9 @@ struct ContentView: View {
         .sheet(item: $appState.tokenInputService) { service in
             TokenInputStackView(tokenInputService: service)
                 .environmentObject(appState)
-                .environmentObject(authState)
+                .environmentObject(runtimeService)
                 .environmentObject(modelService)
+                .environmentObject(authState)
         }
     }
     
@@ -85,25 +86,17 @@ struct ContentView: View {
     
     private func startupTask() async {
         do {
-            try await engineService.startupProcedure()
+            try await runtimeService.startupProcedure()
             await modelService.updateConfiguredServices()
         }
         catch {
             print("Error during startup procedure: \(error)")
-            appState.generalMessage = error.localizedDescription
-        }
-    }
-}
-
-extension View {
-    // Applies `transform` to this view if `condition` is `true`.
-    @ViewBuilder
-    func `if`<Content: View>(_ condition: Bool,
-                             transform: (Self) -> Content) -> some View {
-        if condition {
-            transform(self)
-        } else {
-            self
+            if runtimeService.isAuthorizedForRuntime {
+                appState.generalMessage = error.localizedDescription
+            }
+            else {
+                appState.generalMessage = "Missing developer console runtime authorization"
+            }
         }
     }
 }

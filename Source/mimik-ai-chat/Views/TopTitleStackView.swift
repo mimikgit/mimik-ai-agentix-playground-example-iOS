@@ -12,17 +12,17 @@ import SwiftUI
 struct TopTitleStackView: View {
     
     @EnvironmentObject var authState: AuthState
-    @EnvironmentObject var engineService: EngineService
+    @EnvironmentObject var runtimeService: RuntimeService
     @EnvironmentObject var modelService: ModelService
     @EnvironmentObject private var appState: AppState
     @State private var showAddModelTablet: Bool = false
     @State private var showAddModelPhone: Bool = false
-    @State private var validationSelections: Set<EdgeClient.AI.ServiceConfiguration> = []
+    @State private var validationSelections: Set<ClientLibrary.AI.ServiceConfiguration> = []
     
     var body: some View {
         
         ZStack {
-            if engineService.deployedUseCase != nil {
+            if runtimeService.deployedUseCase != nil {
                 VStack {
                     if DeviceType.isTablet {
                         deployedAlreadyMenuTablet
@@ -45,43 +45,44 @@ struct TopTitleStackView: View {
             }
         }
     }
-    
+  
     private var notDeployedYetMenu: some View {
-        
-        VStack() {
+        VStack {
             Image("mimik-ai-logo-white")
             MetallicText(text: "agentix playground", fontSize: 18, color: .amethyst)
-            
+
             MetallicText(text: "START HERE", fontSize: DeviceType.isTablet ? 32 : 12, color: .gold, icon: "gear.badge", iconPosition: .after) {
-                
                 Task {
-                    guard case let .success(config) = ConfigService.decodeJsonDataFrom(file: "mimik-ai-use-case-config", type: EdgeClient.UseCase.self) else {
-                        throw NSError(domain: "Integration Failed", code: 500)
-                    }
-                    
+                    appState.generalMessage = "Deploying..."
                     do {
-                        appState.generalMessage = "Deploying..."
+                        let config: ClientLibrary.UseCase = try ConfigService.decodeJsonDataFrom(
+                            file: "mimik-ai-use-case-config",
+                            type: ClientLibrary.UseCase.self
+                        )
+
                         try? await Task.sleep(nanoseconds: 750_000_000)
                         try await modelService.integrateAIService(useCase: config)
+
                         appState.generalMessage = ""
                         print("✅ mimik AI integration successful")
-                        return config
+                    } catch {
+                        print("⚠️ mimik AI integration failed:", error.localizedDescription)
+                        let nsError = error as NSError
+                        appState.generalMessage = nsError.domain
                     }
-                    catch let error as NSError {
-                        print("⚠️ mimik AI integration failed")
-                        appState.generalMessage = error.domain
-                        throw error
-                    }
-                }                
+                }
             }
-            
+
             if !appState.generalMessage.isEmpty {
                 Spacer()
                 HStack {
                     if appState.activeProtocolStream != nil {
-                        MetallicText(text: "", fontSize: DeviceType.isTablet ? 25 : 16, color: .ruby, icon: "xmark", iconPosition: .after) { appState.stateReset() }
+                        MetallicText(text: "", fontSize: DeviceType.isTablet ? 25 : 16, color: .ruby, icon: "xmark", iconPosition: .after) {
+                            appState.stateReset()
+                        }
                     }
-                    MetallicText(text: appState.generalMessage, fontSize: DeviceType.isTablet ? 23 : 23, color: .silver, lineLimit: .init(lineLimit: DeviceType.isTablet ? 2 : 4, reservesSpace: DeviceType.isTablet ? false : true))
+                    let missing = appState.generalMessage.contains("Missing")
+                    MetallicText(text: appState.generalMessage, fontSize: DeviceType.isTablet ? 23 : 23, color: missing ? .pureRed : .silver, lineLimit: .init(lineLimit: DeviceType.isTablet ? 2 : 4, reservesSpace: DeviceType.isTablet ? false : true))
                 }
             }
         }
@@ -265,17 +266,16 @@ struct TopTitleStackView: View {
             
             Button("Erase All Content", systemImage: "trash.fill", role: .destructive) {
                 Task {
-                    appState.generalMessage = "Please Wait..."
-                    try await engineService.removeEverything()
-                    
+                    try await runtimeService.removeEverything()
                     modelService.stateReset()
                     appState.stateReset()
                     authState.deleteAllTokens()
+                    appState.generalMessage = ""
                 }
             }
             
-            Text("App: \(ConfigService.versionBuild()), mim OE: \(engineService.mimOEVersion)")
-            Text("Token expires on: \(ConfigService.tokenExpiration())")
+            Text("App: \(ConfigService.versionBuild()), mim OE: \(runtimeService.mimOEVersion)")
+            Text("Token expires on: \(ConfigService.tokenExpiration(token: runtimeService.developerConsoleAccessToken))")
             
         } label: {
             HStack {

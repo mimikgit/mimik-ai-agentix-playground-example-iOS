@@ -13,7 +13,7 @@ import SwiftyJSON
 struct AddModelView: View {
         
     @EnvironmentObject var appState: AppState
-    @EnvironmentObject var engineService: EngineService
+    @EnvironmentObject var runtimeService: RuntimeService
     @EnvironmentObject var modelService: ModelService
     @Environment(\.presentationMode) private var presentationMode
     
@@ -107,7 +107,7 @@ struct AddModelView: View {
                 VStack(spacing: 20) {
                     ForEach(ConfigService.modelPresets().indices, id: \.self) { index in
                         
-                        if let selection = ConfigService.modelPresets()[index] as EdgeClient.AI.Model.CreateModelRequest?, selection.id == modModel.id {
+                        if let selection = ConfigService.modelPresets()[index] as ClientLibrary.AI.Model.CreateModelRequest?, selection.id == modModel.id {
                             
                             ModelButton(buttonText: ConfigService.modelPresets()[index].shortDescription, backgroundColor: Color(UIColor.systemBlue).opacity(1.0), foregroundColor: .white, fontSize: DeviceType.isTablet ? 17 : 21, maxWidth: DeviceType.isTablet ? 426 : ScreenSize.screenWidth * 0.8, maxHeight: DeviceType.isTablet ? 60 :50, model: ConfigService.modelPresets()[index]) {
                                 Task {
@@ -161,8 +161,8 @@ struct AddModelView: View {
 
         do {
             // Deploy or get the UseCase first
-            let useCase: EdgeClient.UseCase
-            if let existing = engineService.deployedUseCase {
+            let useCase: ClientLibrary.UseCase
+            if let existing = runtimeService.deployedUseCase {
                 useCase = existing
             } else {
                 useCase = try await deployTask()
@@ -192,32 +192,31 @@ struct AddModelView: View {
             }
         }
     }
-    
-    private func deployTask() async throws -> EdgeClient.UseCase {
-        
-        guard case let .success(config) = ConfigService.decodeJsonDataFrom(file: "mimik-ai-use-case-config", type: EdgeClient.UseCase.self) else {
-            throw NSError(domain: "Integration Failed", code: 500)
-        }
-        
+  
+    private func deployTask() async throws -> ClientLibrary.UseCase {
         do {
+            let config = try ConfigService.decodeJsonDataFrom(
+                file: "mimik-ai-use-case-config",
+                type: ClientLibrary.UseCase.self
+            )
+            
             try await modelService.integrateAIService(useCase: config)
             print("✅ mimik AI integration successful")
             return config
-        }
-        catch let error as NSError {
+        } catch let error as NSError {
             appState.generalMessage = error.domain
             throw error
         }
     }
 
-    private func downloadTask(configuration: EdgeClient.AI.ServiceConfiguration, useCase: EdgeClient.UseCase) async throws {
+    private func downloadTask(configuration: ClientLibrary.AI.ServiceConfiguration, useCase: ClientLibrary.UseCase) async throws {
         
-        guard let model = currentPreset(), let apiKey = ConfigService.fetchConfig(for: .milmApiKey) else {
+        guard let model = currentPreset(), let apiKey = ConfigService.fetchConfig(for: .developerApiKey) else {
             return
         }
         
-        let client: any EdgeClient.AI.ServiceInterface = EdgeClient.AI.HybridClient(configuration: configuration, hybridEdgeClient: self.engineService.hybridEdgeClient)
-        let cancellable = await client.downloadAI(model: model, accessToken: engineService.mimOEAccessToken, apiKey: apiKey, useCase: useCase)
+        let client: any ClientLibrary.AI.ServiceInterface = ClientLibrary.AI.HybridClient(configuration: configuration)
+        let cancellable = await client.downloadAI(model: model, accessToken: runtimeService.mimOEAccessToken, apiKey: apiKey, useCase: useCase)
         
         appState.activeProtocolDownload = cancellable
 
@@ -267,24 +266,24 @@ struct AddModelView: View {
                 }
             }
         } catch {
-            EdgeClient.Log.logDebug(function: #function, line: #line, items: "Streaming error: \(error)", module: .edgeCore)
+            ClientLibrary.Log.logDebug(function: #function, line: #line, items: "Streaming error: \(error)", module: .mimikApps)
             throw error
         }
     }
     
-    private func currentPreset() -> EdgeClient.AI.Model.CreateModelRequest? {
+    private func currentPreset() -> ClientLibrary.AI.Model.CreateModelRequest? {
         
         guard !modModel.id.isEmpty, !modModel.object.isEmpty, !modModel.url.isEmpty else {
             return nil
         }
         
-        let template = EdgeClient.AI.Model.CreateModelRequest.ChatTemplateHint.init(rawValue: modModel.chatHint)
+        let template = ClientLibrary.AI.Model.CreateModelRequest.ChatTemplateHint.init(rawValue: modModel.chatHint)
         
-        let preset = EdgeClient.AI.Model.CreateModelRequest(id: modModel.id, object: modModel.object, url: modModel.url, expectedDownloadSize: modModel.expectedDownloadSize, kind: EdgeClient.AI.Model.Kind(rawValue: modModel.kind) ?? .llm, chatTemplateHint: template, mmprojUrl: modModel.mmprojUrl, ownedBy: modModel.ownedBy, excludeFromBackup: modModel.excludeFromBackup)
+        let preset = ClientLibrary.AI.Model.CreateModelRequest(id: modModel.id, object: modModel.object, url: modModel.url, expectedDownloadSize: modModel.expectedDownloadSize, kind: ClientLibrary.AI.Model.Kind(rawValue: modModel.kind) ?? .llm, chatTemplateHint: template, mmprojUrl: modModel.mmprojUrl, ownedBy: modModel.ownedBy, excludeFromBackup: modModel.excludeFromBackup)
         return preset
     }
     
-    private func loadPreset(decodedModel: EdgeClient.AI.Model.CreateModelRequest?) {
+    private func loadPreset(decodedModel: ClientLibrary.AI.Model.CreateModelRequest?) {
         
         guard let decodedModel = decodedModel else {
             print("⚠️ Decoded model missing")

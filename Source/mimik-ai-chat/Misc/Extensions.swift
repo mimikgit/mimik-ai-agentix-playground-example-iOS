@@ -37,6 +37,27 @@ extension Color {
     static let lightGray = Color(red: 211/255, green: 211/255, blue: 211/255)
 }
 
+extension View {
+    // Applies `transform` to this view if `condition` is `true`.
+    @ViewBuilder
+    func `if`<Content: View>(_ condition: Bool,
+                             transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
+    
+    func textFieldModifier(minWidth: CGFloat = 100, minHeight: CGFloat = 34, borderColor: Color = .gray, lineWidth: CGFloat = 1) -> some View {
+        self.modifier(BorderTextFieldModifier(minWidth: minWidth, minHeight: minHeight, borderColor: borderColor, lineWidth: lineWidth))
+    }
+    
+    func customBackground(backgroundColor: Color, cornerRadius: CGFloat? = nil, borderColor: Color? = nil, borderWidth: CGFloat = 1.0, padding: CGFloat = 16.0) -> some View {
+        self.modifier(CustomBackgroundModifier(backgroundColor: backgroundColor, cornerRadius: cornerRadius, borderColor: borderColor, borderWidth: borderWidth, padding: padding))
+    }
+}
+
 extension String {
     func decodeBase64StringToImage() -> UIImage? {
         var paddedString: String = self

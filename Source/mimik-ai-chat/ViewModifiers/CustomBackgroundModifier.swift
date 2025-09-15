@@ -26,9 +26,3 @@ struct CustomBackgroundModifier: ViewModifier {
             )
     }
 }
-
-extension View {
-    func customBackground(backgroundColor: Color, cornerRadius: CGFloat? = nil, borderColor: Color? = nil, borderWidth: CGFloat = 1.0, padding: CGFloat = 16.0) -> some View {
-        self.modifier(CustomBackgroundModifier(backgroundColor: backgroundColor, cornerRadius: cornerRadius, borderColor: borderColor, borderWidth: borderWidth, padding: padding))
-    }
-}

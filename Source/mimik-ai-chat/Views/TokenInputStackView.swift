@@ -14,7 +14,7 @@ struct TokenInputStackView: View {
     @EnvironmentObject var modelService: ModelService
     @EnvironmentObject var appState: AppState
 
-    let tokenInputService: EdgeClient.AI.ServiceConfiguration
+    let tokenInputService: ClientLibrary.AI.ServiceConfiguration
 
     var body: some View {
         ZStack(alignment: .topLeading) {

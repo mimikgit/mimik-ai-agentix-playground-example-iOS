@@ -13,7 +13,7 @@ class AuthState: ObservableObject {
     @Published var geminiAuthenticated: Bool = false
     @Published var mimikAIAuthenticated: Bool = false
     
-    static func storageKey(serviceKind: EdgeClient.AI.ServiceConfiguration.Kind, tokenType: AuthTokenType) -> String {
+    static func storageKey(serviceKind: ClientLibrary.AI.ServiceConfiguration.Kind, tokenType: AuthTokenType) -> String {
         return (serviceKind.rawValue + "-" + tokenType.rawValue).lowercased().replacingOccurrences(of: " ", with: "-")
     }
     
@@ -28,11 +28,11 @@ class AuthState: ObservableObject {
         checkAuthenticationStatus(serviceKind: .mimikAI)
     }
     
-    func accessToken(serviceKind: EdgeClient.AI.ServiceConfiguration.Kind, tokenType: AuthTokenType) -> String? {
+    func accessToken(serviceKind: ClientLibrary.AI.ServiceConfiguration.Kind, tokenType: AuthTokenType) -> String? {
         return KeychainService.read(forKey: AuthState.storageKey(serviceKind: serviceKind, tokenType: tokenType))
     }
 
-    func checkAuthenticationStatus(serviceKind: EdgeClient.AI.ServiceConfiguration.Kind) {
+    func checkAuthenticationStatus(serviceKind: ClientLibrary.AI.ServiceConfiguration.Kind) {
         let developerToken = KeychainService.read(forKey: AuthState.storageKey(serviceKind: serviceKind, tokenType: .developerToken))
         
         switch serviceKind {
@@ -45,7 +45,7 @@ class AuthState: ObservableObject {
         }
     }
     
-    func saveToken(token: String, serviceKind: EdgeClient.AI.ServiceConfiguration.Kind, tokenType: AuthState.AuthTokenType) {
+    func saveToken(token: String, serviceKind: ClientLibrary.AI.ServiceConfiguration.Kind, tokenType: AuthState.AuthTokenType) {
         print(#function, token, serviceKind, tokenType.rawValue)
         let key = AuthState.storageKey(serviceKind: serviceKind, tokenType: tokenType)
         KeychainService.save(token, forKey: key)
@@ -53,14 +53,14 @@ class AuthState: ObservableObject {
     }
     
     func deleteAllTokens() {        
-        print(#function)
+        print("⚠️ AuthState", #function)
         deleteServiceToken(serviceKind: .gemini)
         deleteServiceToken(serviceKind: .mimikAI)
         checkAuthenticationStatus(serviceKind: .gemini)
         checkAuthenticationStatus(serviceKind: .mimikAI)
     }
 
-    func deleteServiceToken(serviceKind: EdgeClient.AI.ServiceConfiguration.Kind) {
+    func deleteServiceToken(serviceKind: ClientLibrary.AI.ServiceConfiguration.Kind) {
         
         print(#function, serviceKind.rawValue)
 

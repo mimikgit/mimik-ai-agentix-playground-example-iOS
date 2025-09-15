@@ -11,10 +11,9 @@ import EdgeCore
 class ConfigService {
 
     enum ConfigType: String {
-        case milmApiKey = "config-mimik-ai-use-case-api-key"
-        case mimOELicense = "config-developer-mim-OE-license"
+        case developerApiKey = "config-developer-api-key"
+        case runtimeLicense = "config-developer-runtime-license"
         case ownerCode = "config-owner-code"
-        case devIdToken = "config-developer-id-token"
         case useCaseConfigUrl = "config-use-case-config-url"
         case useCaseConfig = "config-use-case"
         
@@ -48,22 +47,21 @@ class ConfigService {
             return nil
         }
     }
-    
-    static func decodeJsonDataFrom<T: Decodable>(file: String, type: T.Type) -> Result<T, NSError> {
-        
+  
+    static func decodeJsonDataFrom<T: Decodable>(file: String, type: T.Type) throws -> T {
         guard let filePath = Bundle.main.path(forResource: file, ofType: "json") else {
             print("⚠️ File not found: \(file)")
-            return .failure(NSError(domain: "File error", code: 500))
+            throw NSError(domain: "File error", code: 500)
         }
         
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: filePath), options: .mappedIfSafe)
             let decoder = JSONDecoder()
             let decodedData = try decoder.decode(T.self, from: data)
-            return .success(decodedData)
+            return decodedData
         } catch {
             print("⚠️ JSON decoding error", error.localizedDescription)
-            return .failure(error as NSError)
+            throw error
         }
     }
     
@@ -74,28 +72,33 @@ class ConfigService {
         return versionBuildString
     }
     
-    static func tokenExpiration() -> String {
-        guard let token = ConfigService.fetchConfig(for: .devIdToken), let expiresIn = EdgeClient.Authorization.AccessToken.expiresIn(token: token) else {
+    static func tokenExpiration(token: String) -> String {
+        guard let expiresIn = ClientLibrary.Authorization.AccessToken.expiresIn(token: token) else {
             return "Invalid Token"
         }
         return expiresIn.formatted()
     }
-    
-    static func modelPresets() -> [EdgeClient.AI.Model.CreateModelRequest] {
-        var models: [EdgeClient.AI.Model.CreateModelRequest] = []
+  
+    static func modelPresets() -> [ClientLibrary.AI.Model.CreateModelRequest] {
+        var models: [ClientLibrary.AI.Model.CreateModelRequest] = []
         
         for filename in bundledModelConfigFilenames() {
-            guard case let .success(decoded) = ConfigService.decodeJsonDataFrom(
+            do {
+                let decoded = try ConfigService.decodeJsonDataFrom(
                     file: filename,
-                    type: EdgeClient.AI.Model.CreateModelRequest.self)
-            else { continue }
-            
-            if (decoded.kind == .vlm || decoded.expectedDownloadSize > 2_000_000_000),
-               !ProcessInfo.processInfo.isiOSAppOnMac {
+                    type: ClientLibrary.AI.Model.CreateModelRequest.self
+                )
+                
+                if (decoded.kind == .vlm || decoded.expectedDownloadSize > 2_000_000_000),
+                   !ProcessInfo.processInfo.isiOSAppOnMac {
+                    continue
+                }
+                
+                models.append(decoded)
+            } catch {
+                print("⚠️ Failed to decode model config: \(filename) → \(error.localizedDescription)")
                 continue
             }
-            
-            models.append(decoded)
         }
         
         return models
@@ -127,7 +130,7 @@ class ConfigService {
     }
 }
 
-extension EdgeClient.AI.Model.CreateModelRequest {
+extension ClientLibrary.AI.Model.CreateModelRequest {
     var shortDescription: String {
         let components = id.split(separator: "/")
         if components.count > 1{

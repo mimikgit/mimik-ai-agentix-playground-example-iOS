@@ -13,7 +13,7 @@ struct MenuViewPrompt: View {
 
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authState: AuthState
-    @EnvironmentObject var engineService: EngineService
+    @EnvironmentObject var runtimeService: RuntimeService
     @EnvironmentObject var modelService: ModelService
     
     @Binding internal var showAddModelTablet: Bool
@@ -36,7 +36,7 @@ struct MenuViewPrompt: View {
                 )
                 .ignoresSafeArea()
                 .environmentObject(appState)
-                .environmentObject(engineService)
+                .environmentObject(runtimeService)
                 .environmentObject(modelService)
         }
         .sheet(isPresented: $showAddModelPhone) {
@@ -48,7 +48,7 @@ struct MenuViewPrompt: View {
                 )
                 .ignoresSafeArea()
                 .environmentObject(appState)
-                .environmentObject(engineService)
+                .environmentObject(runtimeService)
                 .environmentObject(modelService)
         }
     }

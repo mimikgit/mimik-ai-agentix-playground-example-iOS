@@ -13,7 +13,7 @@ struct ServiceDropdownPicker: View {
     @EnvironmentObject var modelService: ModelService
     @EnvironmentObject var authState: AuthState
     
-    @Binding var selectedService: EdgeClient.AI.ServiceConfiguration?
+    @Binding var selectedService: ClientLibrary.AI.ServiceConfiguration?
     @State private var isExpanded = false
             
     let placeholder: String
@@ -26,7 +26,7 @@ struct ServiceDropdownPicker: View {
         selectedService == nil ? .white : .gold
     }
   
-    private func mainTitle(for service: EdgeClient.AI.ServiceConfiguration, shortened: Bool) -> String {
+    private func mainTitle(for service: ClientLibrary.AI.ServiceConfiguration, shortened: Bool) -> String {
         let provider = service.kind.rawValue
         let isVLM = (service.model?.kind ?? .llm) == .vlm
         let prefix = isVLM ? "👁️‍🗨️ " : ""
@@ -37,7 +37,7 @@ struct ServiceDropdownPicker: View {
         }
     }
 
-    private func modelTitle(service: EdgeClient.AI.ServiceConfiguration) -> String {
+    private func modelTitle(service: ClientLibrary.AI.ServiceConfiguration) -> String {
         let isVLM = (service.model?.kind ?? .llm) == .vlm
         let prefix = isVLM ? "👁️‍🗨️ " : ""
         let id = service.model?.id ?? "Unknown"

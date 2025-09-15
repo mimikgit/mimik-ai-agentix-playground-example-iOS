@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		31020B4C2C9B8E4900FF3530 /* config-model-05-gemma11.json in Resources */ = {isa = PBXBuildFile; fileRef = 31020B472C9B8E4900FF3530 /* config-model-05-gemma11.json */; };
-		31020B4D2C9B8E4900FF3530 /* config-developer-id-token in Resources */ = {isa = PBXBuildFile; fileRef = 31020B482C9B8E4900FF3530 /* config-developer-id-token */; };
-		31020B4F2C9B8E4900FF3530 /* config-developer-mim-OE-license in Resources */ = {isa = PBXBuildFile; fileRef = 31020B492C9B8E4900FF3530 /* config-developer-mim-OE-license */; };
+		31020B4F2C9B8E4900FF3530 /* config-developer-runtime-license in Resources */ = {isa = PBXBuildFile; fileRef = 31020B492C9B8E4900FF3530 /* config-developer-runtime-license */; };
 		31020B502C9B8E4900FF3530 /* config-mimik-ai-use-case-api-key in Resources */ = {isa = PBXBuildFile; fileRef = 31020B4A2C9B8E4900FF3530 /* config-mimik-ai-use-case-api-key */; };
 		310311732C2375C5000FBC94 /* AddModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310311722C2375C5000FBC94 /* AddModelView.swift */; };
 		310784B92E037CC500E200DA /* TokenInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310784B82E037CC500E200DA /* TokenInputView.swift */; };
@@ -51,7 +50,7 @@
 		31E2825C2E1C38B800D846C2 /* AxisLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E2825B2E1C38B800D846C2 /* AxisLayout.swift */; };
 		31E2825E2E1C429D00D846C2 /* MenuViewValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E2825D2E1C429D00D846C2 /* MenuViewValidation.swift */; };
 		31E282612E1C6A3E00D846C2 /* ModelService+Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E282602E1C6A3E00D846C2 /* ModelService+Models.swift */; };
-		31F8533F2D9C8D5C0020CFA5 /* EngineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F8533E2D9C8D5C0020CFA5 /* EngineService.swift */; };
+		31F8533F2D9C8D5C0020CFA5 /* RuntimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F8533E2D9C8D5C0020CFA5 /* RuntimeService.swift */; };
 		31F955C52DAF17B900E34111 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F955C42DAF17B900E34111 /* AppDelegate.swift */; };
 		31F955C72DAF24D100E34111 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F955C62DAF24D100E34111 /* KeychainService.swift */; };
 		31F955C92DAF260A00E34111 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F955C82DAF260A00E34111 /* AuthState.swift */; };
@@ -60,8 +59,7 @@
 
 /* Begin PBXFileReference section */
 		31020B472C9B8E4900FF3530 /* config-model-05-gemma11.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "config-model-05-gemma11.json"; sourceTree = "<group>"; };
-		31020B482C9B8E4900FF3530 /* config-developer-id-token */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-developer-id-token"; sourceTree = "<group>"; };
-		31020B492C9B8E4900FF3530 /* config-developer-mim-OE-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-developer-mim-OE-license"; sourceTree = "<group>"; };
+		31020B492C9B8E4900FF3530 /* config-developer-runtime-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-developer-runtime-license"; sourceTree = "<group>"; };
 		31020B4A2C9B8E4900FF3530 /* config-mimik-ai-use-case-api-key */ = {isa = PBXFileReference; lastKnownFileType = text; path = "config-mimik-ai-use-case-api-key"; sourceTree = "<group>"; };
 		310311722C2375C5000FBC94 /* AddModelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddModelView.swift; sourceTree = "<group>"; };
 		310784B82E037CC500E200DA /* TokenInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInputView.swift; sourceTree = "<group>"; };
@@ -105,7 +103,7 @@
 		31E2825B2E1C38B800D846C2 /* AxisLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisLayout.swift; sourceTree = "<group>"; };
 		31E2825D2E1C429D00D846C2 /* MenuViewValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewValidation.swift; sourceTree = "<group>"; };
 		31E282602E1C6A3E00D846C2 /* ModelService+Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelService+Models.swift"; sourceTree = "<group>"; };
-		31F8533E2D9C8D5C0020CFA5 /* EngineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineService.swift; sourceTree = "<group>"; };
+		31F8533E2D9C8D5C0020CFA5 /* RuntimeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeService.swift; sourceTree = "<group>"; };
 		31F955C42DAF17B900E34111 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31F955C62DAF24D100E34111 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		31F955C82DAF260A00E34111 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
@@ -151,8 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				31DA27122D834D8800540C89 /* milm-v1-1.9.1.tar */,
-				31020B482C9B8E4900FF3530 /* config-developer-id-token */,
-				31020B492C9B8E4900FF3530 /* config-developer-mim-OE-license */,
+				31020B492C9B8E4900FF3530 /* config-developer-runtime-license */,
 				31020B4A2C9B8E4900FF3530 /* config-mimik-ai-use-case-api-key */,
 				31DA27ED2D834F0800540C89 /* mimik-ai-use-case-config.json */,
 				3179E40B2E26CCF600EB2A58 /* Model Configs */,
@@ -225,7 +222,7 @@
 		31F8E9512DA048AF005D6C41 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				31F8533E2D9C8D5C0020CFA5 /* EngineService.swift */,
+				31F8533E2D9C8D5C0020CFA5 /* RuntimeService.swift */,
 				31233BF52D9C515F0037E342 /* AppState.swift */,
 				31F955C82DAF260A00E34111 /* AuthState.swift */,
 				31F955C62DAF24D100E34111 /* KeychainService.swift */,
@@ -328,11 +325,10 @@
 				3196205A2CD27C2D00ADE960 /* config-model-04-gemma2b.json in Resources */,
 				31DA27132D834D8800540C89 /* milm-v1-1.9.1.tar in Resources */,
 				31020B4C2C9B8E4900FF3530 /* config-model-05-gemma11.json in Resources */,
-				31020B4D2C9B8E4900FF3530 /* config-developer-id-token in Resources */,
 				31A853402D2DAB8C00E6983D /* config-model-03-llama3b.json in Resources */,
 				31DA27EE2D834F0800540C89 /* mimik-ai-use-case-config.json in Resources */,
 				31A853412D2DAB8C00E6983D /* config-model-01-mistral7b.json in Resources */,
-				31020B4F2C9B8E4900FF3530 /* config-developer-mim-OE-license in Resources */,
+				31020B4F2C9B8E4900FF3530 /* config-developer-runtime-license in Resources */,
 				31020B502C9B8E4900FF3530 /* config-mimik-ai-use-case-api-key in Resources */,
 				31D4A97A2D39BA0300639FA1 /* config-model-02-llava7b.json in Resources */,
 				317F4A382C10CCF4006F5F5F /* Preview Assets.xcassets in Resources */,
@@ -415,7 +411,7 @@
 				310F15722DA444EC00DDD8D1 /* ColourText.swift in Sources */,
 				316EE3C12D91FEB600087316 /* MetallicText.swift in Sources */,
 				31701DB12E0B1F6B00AABF64 /* ModelService+Streams.swift in Sources */,
-				31F8533F2D9C8D5C0020CFA5 /* EngineService.swift in Sources */,
+				31F8533F2D9C8D5C0020CFA5 /* RuntimeService.swift in Sources */,
 				31DFA6DE2E09FED7004AEAAB /* ModelService+Prompt.swift in Sources */,
 				31211A1D2D9DA7A400CEB964 /* ModelService.swift in Sources */,
 				31E282612E1C6A3E00D846C2 /* ModelService+Models.swift in Sources */,

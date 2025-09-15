@@ -41,7 +41,16 @@ struct MetallicText: View {
         case ruby
         case amethyst
         case obsidian
+        
+        // Pure solid colors
         case pureBlack
+        case pureWhite
+        case pureRed
+        case pureGreen
+        case pureBlue
+        case pureYellow
+        case pureCyan
+        case pureMagenta
     }
   
     @GestureState private var isPressed = false
@@ -202,6 +211,52 @@ struct MetallicText: View {
         case .obsidian:
             return LinearGradient(
                 gradient: Gradient(colors: [Color.black, Color.gray, Color.darkGray]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .pureRed:
+            return LinearGradient(
+                gradient: Gradient(colors: [Color.red, Color.red, Color.red]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .pureGreen:
+            return LinearGradient(
+                gradient: Gradient(colors: [Color.green, Color.green, Color.green]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .pureBlue:
+            return LinearGradient(
+                gradient: Gradient(colors: [Color.blue, Color.blue, Color.blue]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .pureYellow:
+            return LinearGradient(
+                gradient: Gradient(colors: [Color.yellow, Color.yellow, Color.yellow]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .pureCyan:
+            return LinearGradient(
+                gradient: Gradient(colors: [Color(red: 0, green: 1, blue: 1),
+                                            Color(red: 0, green: 1, blue: 1),
+                                            Color(red: 0, green: 1, blue: 1)]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .pureMagenta:
+            return LinearGradient(
+                gradient: Gradient(colors: [Color(red: 1, green: 0, blue: 1),
+                                            Color(red: 1, green: 0, blue: 1),
+                                            Color(red: 1, green: 0, blue: 1)]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .pureWhite:
+            return LinearGradient(
+                gradient: Gradient(colors: [Color.white, Color.white, Color.white]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )

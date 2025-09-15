@@ -19,7 +19,7 @@ struct ModelButton: View {
     var fontSize: CGFloat
     var maxWidth: CGFloat
     var maxHeight: CGFloat
-    var model: EdgeClient.AI.Model.CreateModelRequest?
+    var model: ClientLibrary.AI.Model.CreateModelRequest?
     var action: () -> Void
 
     var body: some View {
@@ -65,7 +65,7 @@ struct ModelButton: View {
         }
     }
     
-    private func modelTypeIcon(for request: EdgeClient.AI.Model.CreateModelRequest) -> String? {
+    private func modelTypeIcon(for request: ClientLibrary.AI.Model.CreateModelRequest) -> String? {
         let kind = request.kind ?? .llm
         switch kind {
         case .vlm:
@@ -75,7 +75,7 @@ struct ModelButton: View {
         }
     }
     
-    private func modelTypeColour(kind: EdgeClient.AI.Model.Kind) -> Color {
+    private func modelTypeColour(kind: ClientLibrary.AI.Model.Kind) -> Color {
         switch kind {
         case .llm:
             return foregroundColor
@@ -87,7 +87,7 @@ struct ModelButton: View {
     }
     
     // Returns a human-readable identifier for the given model request.
-    private func modelType(for request: EdgeClient.AI.Model.CreateModelRequest) -> String {
+    private func modelType(for request: ClientLibrary.AI.Model.CreateModelRequest) -> String {
         let kind = request.kind ?? .llm
         switch kind {
         case .llm:

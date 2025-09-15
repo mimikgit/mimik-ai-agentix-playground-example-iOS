@@ -8,34 +8,35 @@
 import Alamofire
 import EdgeCore
 import SwiftUI
+import Network
 
 class AppState: ObservableObject {
     
     // Track which service was selected for token input
-    @Published var tokenInputService: EdgeClient.AI.ServiceConfiguration?
+    @Published var tokenInputService: ClientLibrary.AI.ServiceConfiguration?
     
     // Holds the token input the user types in
     @Published var developerToken: String = ""
     
-    @Published var postedMessages: [EdgeClient.AI.Model.Message] = []
+    @Published var postedMessages: [ClientLibrary.AI.Model.Message] = []
     @Published var justDownloadedModelId: String = ""
     @Published var generalMessage: String = ""
     @Published var downloadMessage: String = ""
-    @Published var tokenUsage: [String: EdgeClient.AI.Model.Usage] = [:]
+    @Published var tokenUsage: [String: ClientLibrary.AI.Model.Usage] = [:]
     @Published var newResponse: String = ""
 
     // Active protocol streams
-    @Published var activeProtocolStream: EdgeClient.AI.CancellableStream<EdgeClient.AI.Model.CompletionResponse>?
-    @Published var activeProtocolDownload: EdgeClient.AI.CancellableStream<EdgeClient.AI.DownloadAIEvent>?
+    @Published var activeProtocolStream: ClientLibrary.AI.CancellableStream<ClientLibrary.AI.Model.CompletionResponse>?
+    @Published var activeProtocolDownload: ClientLibrary.AI.CancellableStream<ClientLibrary.AI.DownloadAIEvent>?
     
     // Photo Picker selection
     @Published var selectedImage: UIImage?
     
     // File Picker selection
     @Published var selectedFileURL: URL? = nil
-        
+    
     func stateReset() {
-        print("⚠️ Clear AppState, reset")
+        print("⚠️ AppState", #function)
         postedMessages = []
         justDownloadedModelId = ""
         generalMessage = ""
