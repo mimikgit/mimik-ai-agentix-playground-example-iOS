@@ -15,20 +15,44 @@ The latest versions now include:
 
 This example is built using **ClientLibrary** and **ClientRuntime**, part of the **mimik Client Library v5.10.0**. This unified abstraction layer simplifies working with AI models across device, edge, and cloud environments, supporting real-time streaming and discovery.
 
----
 
-# Prerequisites
+# Why this platform matters
 
-Before getting started:
+| For Developers (Powerful) | For Managers (Magical) |
+|----------------------------|-------------------------|
+| **Single code path** – Interact with both on-device and cloud-hosted AI models using the same API, reducing branching logic and simplifying maintenance. | **One simple workflow** – Build once, and your app taps into both on-device and cloud AI without extra effort. |
+| **Composable model execution** – Chain on-device and online models together for validation, fallback, or multi-step inference without writing custom glue code. | **Smarter together** – Seamlessly combine the strengths of local and online AI for faster, more reliable results. |
+| **Offline-first on-device models** – Local models run without any network dependency, no background telemetry, and no data leaving the user’s phone. | **Always available offline** – On-device AI keeps working with no internet required and no hidden data sharing. |
+| **Privacy by default** – On-device inference is fully local; no hidden telemetry or background data transfer. | **Built-in trust** – User data stays private by default, making compliance and customer confidence effortless. |
+| **Vision VLM support** – Natively run and integrate vision-language models for multimodal apps (image + text understanding) without custom hacks. | **Next-gen AI experiences** – Power products with image + text intelligence, from smart assistants to rich content understanding. |
+| **Capabilities beyond Apple’s APIs** – Provides features not supported by Core ML or Apple’s frameworks (e.g., direct chaining of heterogeneous models, hybrid execution strategies). | **Unleashes new possibilities** – Unlocks capabilities that Apple’s tools don’t allow, giving your product a competitive edge. |
 
-- You **must use a physical iOS device** connected to your Mac.  
-  > The iOS Simulator is **not supported** due to native dependencies.
 
-- Alternatively, you can run the app on an **Apple Silicon Mac**.
 
-> ⚠️ Vision-enabled features are available **only** on Apple Silicon Macs.  
+# Getting Started
 
 > 🆕 **Authentication with your mimik Developer Console account is now required** when the app launches.  
+> The built-in UI flow will guide you through signing up or logging in.  
+>  
+> ⚠️ Vision-enabled features are available **only** on Apple Silicon Macs.  
+
+---
+
+> ## 🚀 Option 1: Try It with TestFlight  
+> Prefer not to build the app yourself?  
+>  
+> 1. Open [this TestFlight link](https://testflight.apple.com/join/qoSKwIAE) on your iOS device.  
+> 2. Accept the invitation and install the app.  
+
+---
+
+> ## 🛠️ Option 2: Compile It Yourself  
+> **Prerequisites**  
+> - You **must use a physical iOS device** connected to your Mac.  
+>   > The iOS Simulator is **not supported** due to native dependencies.  
+> - Alternatively, you can run the app on an **Apple Silicon Mac**.  
+
+
 
 ---
 
@@ -322,17 +346,6 @@ The app is now built on the latest **mimik ClientLibrary v5.10.0**, which brings
 - **EdgeClient → ClientLibrary**  
 - **EdgeEngineClient → ClientRuntime**  
 - **EngineService → RuntimeService**  
-
----
-
-## Try It with TestFlight
-
-Prefer not to build the app yourself?
-
-1. Open [this TestFlight link](https://testflight.apple.com/join/qoSKwIAE) on your iOS device.  
-2. Accept the invitation and install the app.  
-
-> 🆕 With TestFlight builds, login, token retrieval, and runtime licenses are all handled automatically.  
 
 
 ---
